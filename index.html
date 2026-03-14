@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puerto Vivero | Botánica Futurista</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="loader-wrapper">
+    <div class="loader-content">
+        <div class="seed-container">
+            <div class="seed-core"></div>
+            <div class="leaf leaf-1"></div>
+            <div class="leaf leaf-2"></div>
+        </div>
+
+
+        <div class="loading-text">INICIALIZANDO PROTOCOLO PUERTO VIVERO</div>
+        <div class="percentage" id="load-percentage">0%</div>
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="bar-fill"></div>
+        </div>
+    </div>
+</div>
+
+<header>
+    <nav>
+        <div class="logo">PUERTO VIVERO</div>
+        <div class="menu-toggle">☰</div>
+        <ul id="nav-menu">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#mision">Misión</a></li>
+            <li><a href="#aliados">Aliados</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section id="inicio" class="hero">
+    <div class="overlay"></div>
+    <h1>Ecosistemas de Próxima Generación</h1>
+    <p>Bienvenido a la vanguardia de la oxigenación urbana.</p>
+    <button class="btn-neon" onclick="location.href='#productos'">Explorar Catálogo</button>
+</section>
+
+<section id="productos" class="section-padding">
+    <h2 class="title-glow">Sistemas Bio-Digitales</h2>
+    <p class="subtitle">Seleccione un módulo para desplegar el inventario detallado.</p>
+    
+    <div class="main-modules">
+        <div class="module-card card-frutal" onclick="abrirVentana('frutales')">
+            <div class="module-scan"></div>
+            <div class="module-content">
+                <span class="module-id">ID: 001</span>
+                <h3>Módulo Frutal</h3>
+                <p>Especies de alto rendimiento energético.</p>
+            </div>
+        </div>
+
+        <div class="module-card card-ornamental" onclick="abrirVentana('ornamentales')">
+            <div class="module-scan"></div>
+            <div class="module-content">
+                <span class="module-id">ID: 002</span>
+                <h3>Módulo Ornamental</h3>
+                <p>Arquitectura botánica estructural.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="mision" class="section-padding">
+    <div class="mission-wrapper">
+        <h2 class="title-glow">Protocolo de Misión</h2>
+        <p class="subtitle">ESTABLECIENDO ESTÁNDARES DE ÉLITE EN INFRAESTRUCTURA BIÓTICA</p>
+        
+        <div class="mission-grid-v2">
+            <div class="mission-card">
+                <div class="card-header-tech">
+                    <span class="code-text">OBJ_01</span>
+                    <div class="line-glow"></div>
+                </div>
+                <h4>Ingeniería Vegetal</h4>
+                <p>Seleccionamos y producimos plantas injertadas de alto rendimiento bajo rigurosos criterios de resistencia.</p>
+            </div>
+
+            <div class="mission-card">
+                <div class="card-header-tech">
+                    <span class="code-text">OBJ_02</span>
+                    <div class="line-glow"></div>
+                </div>
+                <h4>Seguridad Ambiental</h4>
+                <p>Fortalecemos espacios urbanos mediante biomasa que mejora la calidad del aire y reduce el calor.</p>
+            </div>
+
+            <div class="mission-card">
+                <div class="card-header-tech">
+                    <span class="code-text">OBJ_03</span>
+                    <div class="line-glow"></div>
+                </div>
+                <h4>Excelencia Operativa</h4>
+                <p>Compromiso absoluto con la naturaleza, asegurando estándares de vida óptimos en cada ejemplar.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="aliados" class="section-padding">
+    <div class="container">
+        <h2 class="title-glow">Nodos de Confianza</h2>
+        <p class="subtitle">Empresas, organizaciones y clientes que confían en Puerto Vivero para el suministro de plantas de alta calidad y el desarrollo de espacios verdes.</p>
+        
+        <div class="logos-grid">
+            <div class="logo-item">
+                <img src="imagenes/logo-empresa1.png" alt="Aliado" class="logo-gray">
+                <div class="logo-glow"></div>
+            </div>
+            <div class="logo-item">
+                <img src="imagenes/logo-empresa2.png" alt="Aliado" class="logo-gray">
+                <div class="logo-glow"></div>
+            </div>
+            <div class="logo-item">
+                <img src="imagenes/logo-empresa3.png" alt="Aliado" class="logo-gray">
+                <div class="logo-glow"></div>
+            </div>
+            <div class="logo-item">
+                <img src="imagenes/logo-empresa4.png" alt="Aliado" class="logo-gray">
+                <div class="logo-glow"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="nosotros" class="section-padding">
+    <div class="nosotros-container">
+        <div class="nosotros-foto">
+            <div class="foto-frame">
+                <img src="imagenes/tu-foto.jpg" alt="Luis Butron">
+                <div class="foto-overlay"></div>
+            </div>
+            <div class="status-bar">
+                <span class="blink">●</span> ASESOR COMERCIAL: Luis Butron
+            </div>
+        </div>
+
+        <div class="nosotros-texto">
+            <h2 class="title-glow">¿Quiénes Somos?</h2>
+            <p class="perfil-profesional">
+                Puerto Vivero es un proyecto liderado por <span class="highlight">Luis Butron</span>, enfocado en la producción de 
+                <strong>plantas injertadas</strong> de alta calidad.
+            </p>
+            
+            <div class="protocolo-box">
+                <h4><span class="code-text">></span> NUESTRA FILOSOFÍA</h4>
+                <p>Creemos que la calidad biótica es la base de un cultivo exitoso. Seleccionamos cada ejemplar bajo estrictos controles.</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-num">+100</span>
+                    <span class="stat-desc">Proyectos realizados</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-num">100%</span>
+                    <span class="stat-desc">Calidad Certificada</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contacto" class="section-padding">
+    <div class="container">
+        <h2 class="title-glow">Enlace de Protocolo</h2>
+        <div class="contacto-wrapper">
+            <div class="contacto-info">
+                <div class="info-item">
+                    <span class="info-label">Ubicación</span>
+                    <p>Sede Central - Puerto Colombia</p>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Canal Directo</span>
+                    <p>+57 3025465134</p>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Estado</span>
+                    <p class="blink">● Operativo / Recepción Abierta</p>
+                </div>
+            </div>
+
+            <form class="contacto-form">
+                <div class="input-group">
+                    <input type="text" placeholder="IDENTIFICACIÓN / NOMBRE" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" placeholder="CORREO ELECTRÓNICO" required>
+                </div>
+                <div class="input-group">
+                    <textarea rows="5" placeholder="MENSAJE DE CONSULTA"></textarea>
+                </div>
+                <button type="submit" class="btn-neon">Transmitir Mensaje</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<div id="ventana-productos" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span id="titulo-categoria">CARGANDO DATOS...</span>
+            <button class="close-btn" onclick="cerrarVentana()">[ ESC_SALIR ]</button>
+        </div>
+        <div id="lista-items" class="modal-body"></div>
+        <div class="modal-footer">PUERTO VIVERO - SISTEMA DE INVENTARIO V.1.0</div>
+    </div>
+</div>
+
+<div class="cart-btn-flotante" onclick="toggleCart()">
+    <span style="font-size: 24px;">🛒</span>
+    <span id="cart-count">0</span>
+</div>
+
+<div id="cart-panel" class="cart-panel">
+    <div class="cart-header">
+        <h3>Tu Pedido</h3>
+        <span class="close-cart" onclick="toggleCart()">✕</span>
+    </div>
+    
+    <div id="cart-items-list"></div>
+
+    <div id="datos-pedido-final" style="padding: 15px; background: rgba(31, 236, 31, 0.05); border-top: 1px solid #1fec1f; margin-top: 10px;">
+        <p class="code-text" style="font-size: 0.7rem; margin-bottom: 10px;">DATOS DE ENTREGA</p>
+        <div class="input-group">
+            <input type="text" id="final-nombre" placeholder="NOMBRE COMPLETO" style="width: 100%; background: #000; color: #fff; border: 1px solid #1fec1f; padding: 8px; margin-bottom: 8px; font-family: 'Orbitron'; font-size: 0.8rem;">
+        </div>
+        <div class="input-group">
+            <input type="text" id="final-ciudad" placeholder="CIUDAD / UBICACIÓN" style="width: 100%; background: #000; color: #fff; border: 1px solid #1fec1f; padding: 8px; font-family: 'Orbitron'; font-size: 0.8rem;">
+        </div>
+    </div>
+
+    <button class="btn-cotizar-todo" onclick="enviarPedidoWhatsApp()">
+        Enviar Cotización Directa
+    </button>
+</div>
+
+<footer class="footer-final">
+    <div class="footer-line"></div>
+    <div class="footer-content">
+        <p class="copyright">Puerto Vivero © 2026 | Barranquilla - Puerto Colombia</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+
+<script>
+window.addEventListener("load", () => {
+    const percentageText = document.getElementById("load-percentage");
+    const barFill = document.getElementById("bar-fill");
+    const loader = document.getElementById("loader-wrapper");
+    const leaf1 = document.querySelector(".leaf-1");
+    const leaf2 = document.querySelector(".leaf-2");
+    
+    let count = 0;
+    const startLoading = setInterval(() => {
+        count++;
+        if (percentageText) percentageText.innerText = count + "%";
+        if (barFill) barFill.style.width = count + "%";
+        
+        if(count > 20 && leaf1) {
+            leaf1.style.opacity = "1";
+            leaf1.style.width = "40px";
+            leaf1.style.height = "40px";
+        }
+        
+        if(count > 50 && leaf2) {
+            leaf2.style.opacity = "1";
+            leaf2.style.width = "35px";
+            leaf2.style.height = "35px";
+        }
+
+        if (count >= 100) {
+            clearInterval(startLoading);
+            
+            // Asegura que la página inicie arriba al terminar de cargar
+            window.scrollTo(0, 0);
+
+            setTimeout(() => {
+                loader.style.opacity = "0";
+                loader.style.visibility = "hidden";
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }, 500); 
+        }
+    }, 30);
+});
+</script>
+
+<audio id="hover-audio" preload="auto">
+    <source src="hover.mp3" type="audio/mpeg">
+</audio>
+
+</body>
+</html>

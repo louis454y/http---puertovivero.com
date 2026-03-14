@@ -1,0 +1,1642 @@
+/* CONFIGURACIÓN BASE */
+* {
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Orbitron', sans-serif;
+    background-color: #020502;
+    color: #ccffcc;
+    overflow-x: hidden;
+}
+
+/* =========================================
+   2. NAVEGACIÓN (HEADER) - CORREGIDO
+   ========================================= */
+header {
+    position: fixed;
+    width: 100%;
+    background: rgba(2, 5, 2, 0.98);
+    border-bottom: 2px solid #1fec1f;
+    z-index: 1000;
+    box-shadow: 0 0 15px rgba(31, 236, 31, 0.3);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between; /* Mantiene logo a la izq y menú a la der */
+    align-items: center;
+    padding: 0.8rem 5%; /* Un poco más compacto */
+    max-width: 100vw;
+}
+
+.logo {
+    font-size: 1.5rem; /* Tamaño base reducido */
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+    white-space: nowrap; /* Evita que el nombre se parta en dos líneas */
+    animation: pulsoNeon 3s infinite ease-in-out;
+}
+
+/* style.css */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+}
+
+ul {
+    display: flex; /* Asegura que sea una fila */
+    flex-direction: row; /* Fuerza la dirección horizontal */
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    display: inline-block; /* Refuerza que los items no se salten de línea */
+}
+
+/* =========================================
+   5. DISEÑO RESPONSIVO (MÓVIL TOTAL)
+   ========================================= */
+@media (max-width: 768px) {
+    nav {
+        padding: 0.8rem 5%;
+    }
+
+    .logo {
+        font-size: 1.1rem; /* Más pequeño en móvil para dar espacio */
+    }
+
+    .menu-toggle {
+        display: block; 
+        color: #1fec1f;
+        font-size: 1.6rem;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    ul {
+        display: none; 
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(2, 5, 2, 0.95);
+        border-bottom: 2px solid #1fec1f;
+        padding: 20px 0;
+        text-align: center;
+        gap: 15px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+
+    ul.active {
+        display: flex; 
+    }
+
+    .hero h1 {
+        font-size: 1.5rem; 
+        margin-top: 50px;
+    }
+}
+
+/* CONFIGURACIÓN PARA ESCRITORIO (PC) */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+}
+
+ul {
+    display: flex; /* En PC siempre debe ser flex */
+    flex-direction: row; /* Los elementos van de lado a lado */
+    gap: 30px;
+    list-style: none; /* Quita los puntos de la lista */
+    margin: 0;
+    padding: 0;
+}
+
+.menu-toggle {
+    display: none; /* Oculto en PC */
+}
+
+/* SECCIONES GENERALES */
+.section-padding {
+    padding: 120px 10%;
+    text-align: center;
+}
+
+.title-glow {
+    color: #1fec1f;
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px rgba(31, 236, 31, 0.5);
+}
+
+.subtitle {
+    color: #88ff88;
+    margin-bottom: 60px;
+    opacity: 0.8;
+    letter-spacing: 1px;
+}
+
+/* HERO SECTION */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                url('https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&q=80&w=2070');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+/* MÓDULOS DE PRODUCTOS */
+.main-modules {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.module-card {
+    width: 320px;
+    height: 420px;
+    background: rgba(0, 30, 0, 0.3);
+    border: 1px solid #1fec1f;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.5s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 30px;
+}
+
+.module-card:hover {
+    box-shadow: 0 0 40px rgba(31, 236, 31, 0.4);
+    transform: translateY(-10px);
+    background: rgba(0, 50, 0, 0.4);
+}
+
+.module-scan {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, transparent, rgba(31, 236, 31, 0.3), transparent);
+    animation: scanning 4s infinite linear;
+}
+
+@keyframes scanning {
+    0% { top: -100%; }
+    100% { top: 100%; }
+}
+
+.module-content h3 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    color: #fff;
+}
+
+.module-id {
+    font-family: monospace;
+    color: #1fec1f;
+    font-size: 0.8rem;
+}
+
+/* BOTÓN NEÓN FLOTANTE ÉPICO */
+.btn-neon {
+    padding: 15px 40px;
+    background: transparent;
+    border: 2px solid #1fec1f;
+    color: #1fec1f;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 0 15px rgba(31, 236, 31, 0.5);
+    transition: 0.4s;
+    font-family: 'Orbitron', sans-serif;
+    position: relative;
+    overflow: hidden;
+
+    /* APLICACIÓN DE LA ANIMACIÓN DE LEVITACIÓN */
+    animation: levitacion Magnetica 3s infinite ease-in-out;
+}
+
+.btn-neon:hover {
+    background: #1fec1f;
+    color: #000;
+    box-shadow: 0 0 30px #1fec1f, 0 0 60px rgba(31, 236, 31, 0.6);
+    transform: scale(1.1); /* Se hace un poco más grande al tocarlo */
+    animation-play-state: paused; /* Se detiene la flotación al poner el cursor */
+}
+
+/* =========================================
+   DEFINICIÓN DE LA LEVITACIÓN MAGNÉTICA
+   ========================================= */
+@keyframes levitacionMagnetica {
+    0% {
+        transform: translateY(0);
+        box-shadow: 0 5px 15px rgba(31, 236, 31, 0.3);
+    }
+    50% {
+        transform: translateY(-15px); /* Sube 15 píxeles */
+        box-shadow: 0 25px 25px rgba(31, 236, 31, 0.2); /* La sombra se aleja y se suaviza */
+    }
+    100% {
+        transform: translateY(0);
+        box-shadow: 0 5px 15px rgba(31, 236, 31, 0.3);
+    }
+}
+
+.btn-neon:hover {
+    background: #1fec1f;
+    color: #000;
+}
+
+/* VENTANA EMERGENTE (MODAL) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 5, 0, 0.95);
+    backdrop-filter: blur(10px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+}
+
+.modal-content {
+    background: #050a05;
+    width: 95%;
+    max-width: 900px;
+    border: 1px solid #1fec1f;
+    box-shadow: 0 0 50px rgba(31, 236, 31, 0.2);
+    animation: zoomIn 0.3s ease-out;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-header {
+    background: #1fec1f;
+    color: #000;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    align-items: center;
+}
+
+.close-btn {
+    background: transparent;
+    border: 2px solid #000;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+.modal-body {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* Scrollbar personalizada */
+.modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+.modal-body::-webkit-scrollbar-thumb {
+    background: #1fec1f;
+}
+
+/* TARJETA DE PRODUCTO COTIZADOR */
+.planta-link-cotizador {
+    background: rgba(31, 236, 31, 0.03);
+    border: 1px solid rgba(31, 236, 31, 0.2);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+.planta-link-cotizador:hover {
+    border-color: #1fec1f;
+    background: rgba(31, 236, 31, 0.07);
+}
+
+.visual-hologram {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    border: 1px solid rgba(31, 236, 31, 0.3);
+    background: #000;
+    position: relative;
+}
+
+.visual-hologram img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+    transition: 0.5s ease;
+    filter: none; /* IMÁGENES A COLOR */
+}
+
+.visual-hologram:hover img {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.info-planta {
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+.code-text {
+    color: #1fec1f;
+    font-family: monospace;
+    font-size: 0.8rem;
+}
+
+/* CONTROLES DE COTIZACIÓN */
+.controles-cotizacion {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-top: 1px solid rgba(31, 236, 31, 0.1);
+    padding-top: 10px;
+}
+
+.campo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.input-futurista {
+    background: #000;
+    border: 1px solid #1fec1f;
+    color: #1fec1f;
+    padding: 4px 8px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    outline: none;
+}
+
+.input-futurista.cant {
+    width: 70px;
+}
+
+.btn-cotizar-item {
+    background: #1fec1f;
+    color: #000;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    transition: 0.3s;
+    margin-top: 5px;
+}
+
+.btn-cotizar-item:hover {
+    box-shadow: 0 0 15px #1fec1f;
+    background: #fff;
+}
+
+.modal-footer {
+    padding: 15px;
+    text-align: center;
+    font-size: 0.7rem;
+    color: rgba(31, 236, 31, 0.5);
+    border-top: 1px solid rgba(31, 236, 31, 0.2);
+}
+
+/* IMÁGENES DE FONDO PARA LOS MÓDULOS */
+.card-frutal {
+    background: linear-gradient(rgba(0, 20, 0, 0.6), rgba(0, 0, 0, 0.9)), 
+                url('imagenes/fondo-frutal.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.card-ornamental {
+    background: linear-gradient(rgba(0, 20, 0, 0.6), rgba(0, 0, 0, 0.9)), 
+                url('imagenes/fondo-ornamental.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* EFECTO AL PASAR EL MOUSE POR EL MÓDULO */
+.module-card:hover {
+    background: linear-gradient(rgba(31, 236, 31, 0.2), rgba(0, 0, 0, 0.9)), 
+                url('imagenes/fondo-frutal.jpg'); /* Se aclara al pasar el mouse */
+    background-size: cover;
+    background-position: center;
+    border-color: #fff;
+}
+
+.card-ornamental:hover {
+    background: linear-gradient(rgba(31, 236, 31, 0.2), rgba(0, 0, 0, 0.9)), 
+                url('imagenes/fondo-ornamental.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* SECCIÓN QUIÉNES SOMOS */
+.nosotros-container {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: left;
+    flex-wrap: wrap; /* Para que en celulares se ponga uno abajo de otro */
+}
+
+.nosotros-foto {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+}
+
+.foto-frame {
+    position: relative;
+    border: 2px solid #1fec1f;
+    padding: 10px;
+    background: rgba(31, 236, 31, 0.05);
+    display: inline-block;
+}
+
+.foto-frame img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    display: block;
+    filter: grayscale(0%); /* Cambiado de 30% a 0% para color total */
+    transition: 0.5s;
+}
+
+.foto-frame:hover img {
+    filter: grayscale(0%);
+}
+
+.status-bar {
+    margin-top: 15px;
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: #1fec1f;
+    letter-spacing: 2px;
+}
+
+.blink {
+    animation: blinker 1.5s linear infinite;
+}
+
+@keyframes blinker {
+    50% { opacity: 0; }
+}
+
+.nosotros-texto {
+    flex: 1.5;
+    min-width: 300px;
+}
+
+.highlight {
+    color: #1fec1f;
+    font-weight: bold;
+}
+
+.protocolo-box {
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 4px solid #1fec1f;
+    padding: 20px;
+    margin: 25px 0;
+}
+
+.stats-grid {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-num {
+    font-size: 1.8rem;
+    color: #1fec1f;
+    font-weight: bold;
+}
+
+.stat-desc {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #88ff88;
+}
+
+/* DISEÑO AVANZADO DE MISIÓN */
+.mission-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.mission-grid-v2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 50px;
+}
+
+.mission-card {
+    background: linear-gradient(135deg, rgba(31, 236, 31, 0.05) 0%, rgba(0, 0, 0, 0.4) 100%);
+    border: 1px solid rgba(31, 236, 31, 0.15);
+    padding: 35px;
+    text-align: left;
+    position: relative;
+    transition: 0.4s ease;
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 90% 100%, 0 100%); /* Esquina cortada tipo tech */
+}
+
+.mission-card:hover {
+    border-color: #1fec1f;
+    background: rgba(31, 236, 31, 0.08);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(31, 236, 31, 0.1);
+}
+
+.card-header-tech {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.line-glow {
+    height: 1px;
+    flex-grow: 1;
+    background: linear-gradient(90deg, #1fec1f, transparent);
+}
+
+.mission-card h4 {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.mission-card p {
+    color: #ccffcc;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    opacity: 0.8;
+}
+
+/* Decoración de esquina */
+.mission-card::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background: #1fec1f;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+/* =========================================
+   NAVEGACIÓN Y LOGO ÉPICO (ACTUALIZADO)
+   ========================================= */
+header {
+    position: fixed;
+    width: 100%;
+    background: rgba(2, 5, 2, 0.98); /* Un poco más opaco para resaltar el brillo */
+    border-bottom: 2px solid #1fec1f;
+    z-index: 1000;
+    box-shadow: 0 0 15px rgba(31, 236, 31, 0.3); /* Sombra sutil en la barra */
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 5%; /* Un poco más compacto */
+    align-items: center;
+}
+
+.logo {
+    font-size: 2rem; /* Ligeramente más grande */
+    color: #fff; /* Color base blanco para que el neón resalte */
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 4px; /* Más espaciado, más futurista */
+    position: relative;
+    
+    /* APLICACIÓN DE LA ANIMACIÓN */
+    animation: pulsoNeon 3s infinite ease-in-out;
+    
+    /* Un toque extra: un sutil resplandor de fondo constante */
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* =========================================
+   DEFINICIÓN DE LA ANIMACIÓN DE PULSO
+   ========================================= */
+@keyframes pulsoNeon {
+    0%, 100% {
+        /* Estado: Brillo Bajo (Casi apagado) */
+        color: rgba(31, 236, 31, 0.5); /* Verde tenue y transparente */
+        text-shadow: 0 0 2px rgba(31, 236, 31, 0.2);
+    }
+    
+    50% {
+        /* Estado: Brillo Máximo (Épico) */
+        color: #fff; /* Texto blanco brillante */
+        text-shadow: 
+            0 0 5px #fff,
+            0 0 10px #fff,
+            0 0 20px #1fec1f, /* Neón Verde */
+            0 0 30px #1fec1f,
+            0 0 40px #1fec1f,
+            0 0 55px #1fec1f,
+            0 0 75px #1fec1f;
+    }
+}
+
+/* Ajuste para los enlaces del menú para que no compitan con el logo */
+ul li a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: 0.3s;
+    text-transform: uppercase;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+}
+
+ul li a:hover {
+    color: #fff;
+    text-shadow: 0 0 10px #1fec1f;
+}
+
+/* SECCIÓN CONTACTO PROFESIONAL */
+.contacto-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.contacto-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+}
+
+.info-label {
+    display: block;
+    color: #1fec1f;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.info-item p {
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: 300;
+}
+
+/* FORMULARIO ESTILO TERMINAL */
+.contacto-form {
+    background: rgba(31, 236, 31, 0.03);
+    padding: 40px;
+    border: 1px solid rgba(31, 236, 31, 0.1);
+    position: relative;
+}
+
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-group input, 
+.input-group textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(31, 236, 31, 0.3);
+    color: #fff;
+    padding: 12px 5px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    outline: none;
+    transition: 0.4s;
+}
+
+.input-group input:focus, 
+.input-group textarea:focus {
+    border-bottom-color: #1fec1f;
+    background: rgba(31, 236, 31, 0.05);
+}
+
+/* Responsivo para móviles */
+@media (max-width: 768px) {
+    .contacto-wrapper {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .contacto-form {
+        padding: 20px;
+    }
+}
+
+
+/* BOTÓN WHATSAPP FLOTANTE */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: transparent;
+    border: 2px solid #1fec1f;
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    z-index: 9999;
+    box-shadow: 0 0 20px rgba(31, 236, 31, 0.2);
+    transition: 0.4s ease;
+    overflow: hidden;
+}
+
+.whatsapp-icon {
+    width: 24px;
+    height: 24px;
+    fill: #1fec1f;
+    transition: 0.4s;
+}
+
+.wa-text {
+    color: #1fec1f;
+    font-size: 0.75rem;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+/* ANIMACIÓN DE PULSO SUAVE */
+.whatsapp-float {
+    animation: pulsoContacto 2.5s infinite;
+}
+
+@keyframes pulsoContacto {
+    0% {
+        box-shadow: 0 0 0 0 rgba(31, 236, 31, 0.6);
+        transform: scale(1);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(31, 236, 31, 0);
+        transform: scale(1.03);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(31, 236, 31, 0);
+        transform: scale(1);
+    }
+}
+
+.whatsapp-float:hover {
+    background: #1fec1f;
+    box-shadow: 0 0 30px #1fec1f;
+}
+
+.whatsapp-float:hover .whatsapp-icon {
+    fill: #000;
+}
+
+.whatsapp-float:hover .wa-text {
+    color: #000;
+}
+
+/* Ajuste para móviles */
+@media (max-width: 768px) {
+    .wa-text {
+        display: none; /* En móviles solo dejamos el icono circular */
+    }
+    .whatsapp-float {
+        padding: 15px;
+        border-radius: 50%;
+        bottom: 20px;
+        right: 20px;
+    }
+    .whatsapp-icon {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* PIE DE PÁGINA PROFESIONAL */
+.footer-final {
+    padding: 60px 5% 40px;
+    background-color: #020502;
+    text-align: center;
+}
+
+.footer-line {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #1fec1f, transparent);
+    margin-bottom: 30px;
+    opacity: 0.5;
+}
+
+.legal-links {
+    margin-bottom: 20px;
+}
+
+.legal-links a {
+    color: #88ff88;
+    text-decoration: none;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+    opacity: 0.7;
+}
+
+.legal-links a:hover {
+    color: #1fec1f;
+    opacity: 1;
+}
+
+.separator {
+    color: #1fec1f;
+    margin: 0 15px;
+    font-size: 0.8rem;
+}
+
+.copyright {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: monospace;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 600px) {
+    .legal-links {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .separator {
+        display: none;
+    }
+}
+
+/* PANTALLA DE CARGA */
+#loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #020502;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.loader-content {
+    text-align: center;
+    width: 300px;
+}
+
+/* LA SEMILLA TECNOLÓGICA */
+.seed-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 30px;
+}
+
+.seed-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 30px;
+    background: #1fec1f;
+    border-radius: 50% 50% 40% 40%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px #1fec1f;
+    z-index: 2;
+}
+
+.leaf {
+    position: absolute;
+    width: 0;
+    height: 0;
+    background: #1fec1f;
+    opacity: 0;
+    transition: all 0.5s ease;
+    border-radius: 0 100% 0 100%;
+}
+
+/* TEXTOS Y BARRA */
+.loading-text {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: #1fec1f;
+    margin-bottom: 10px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.percentage {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 15px #1fec1f;
+    margin-bottom: 20px;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 2px;
+    background: rgba(31, 236, 31, 0.1);
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    width: 0%;
+    height: 100%;
+    background: #1fec1f;
+    box-shadow: 0 0 10px #1fec1f;
+    transition: width 0.1s linear;
+}
+
+/* ESTADO FINAL DEL LOADER (Ocultar) */
+.loader-hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.leaf {
+    position: absolute;
+    background: #1fec1f;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    border-radius: 0 100% 0 100%;
+    box-shadow: 0 0 15px rgba(31, 236, 31, 0.5);
+    transition: all 1s ease; /* Esto hace que el florecimiento sea suave */
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column; /* Logo arriba, menú abajo */
+        padding: 10px;
+    }
+
+    .logo {
+        font-size: 1.4rem; /* Reducimos el logo en móvil */
+        margin-bottom: 10px;
+    }
+
+    ul {
+        gap: 15px; /* Menos espacio entre botones */
+    }
+
+    ul li a {
+        font-size: 0.7rem; /* Texto más pequeño para que quepa todo */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.8rem; /* Tamaño mucho más equilibrado */
+        line-height: 1.2;
+    }
+    
+    .hero p {
+        font-size: 0.9rem;
+        padding: 0 15px;
+    }
+
+    .btn-neon {
+        padding: 12px 25px; /* Botón un poco más pequeño */
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-modules {
+        gap: 20px;
+    }
+
+    .module-card {
+        width: 100%; /* Ocupa todo el ancho disponible */
+        max-width: 320px;
+        height: 350px; /* Un poco más bajas para no hacer tanto scroll */
+    }
+}
+
+/* =========================================
+   REPARACIÓN DE INTERFAZ MÓVIL (EXTREMA)
+   ========================================= */
+
+@media (max-width: 768px) {
+    /* 1. Reparar el Header y el Menú */
+    nav {
+        flex-direction: column; /* Ponemos el logo arriba y el menú abajo */
+        padding: 0.8rem 2%;
+        gap: 10px;
+    }
+
+    .logo {
+        font-size: 1.5rem; /* Logo más moderado para móvil */
+        letter-spacing: 2px;
+    }
+
+    ul {
+        gap: 10px; /* Reducimos el espacio entre los enlaces */
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap; /* Si no caben, se ponen en dos filas limpiamente */
+    }
+
+    ul li a {
+        font-size: 0.65rem; /* Texto pequeño pero legible */
+        letter-spacing: 0px;
+    }
+
+    /* 2. Ajustar el Título Principal (Hero) */
+    .hero h1 {
+        font-size: 1.8rem !important; /* Forzamos que el título quepa bien */
+        line-height: 1.2;
+        margin-top: 50px; /* Bajamos un poco el título para que no choque con el menú */
+    }
+
+    .hero p {
+        font-size: 0.85rem;
+        padding: 0 10px;
+    }
+
+    /* 3. Ajustar Secciones de Texto */
+    .title-glow {
+        font-size: 1.6rem;
+    }
+
+    .subtitle {
+        font-size: 0.8rem;
+        margin-bottom: 30px;
+    }
+
+    .section-padding {
+        padding: 60px 5%; /* Menos relleno en los lados para ganar espacio */
+    }
+
+    /* 4. Módulos y Fotos */
+    .nosotros-container {
+        gap: 30px;
+        flex-direction: column;
+    }
+
+    .foto-frame img {
+        max-width: 280px; /* Foto de Luis Butron más pequeña en móvil */
+    }
+
+    .contacto-form {
+        padding: 20px;
+    }
+}
+
+/* Ajuste específico para celulares muy pequeños */
+@media (max-width: 380px) {
+    .logo {
+        font-size: 1.2rem;
+    }
+    ul li a {
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Ajuste del Logo */
+    .logo {
+        font-size: 1.4rem !important;
+        letter-spacing: 2px;
+    }
+
+    /* Botón Hamburguesa */
+    .menu-toggle {
+        display: block;
+        color: #1fec1f;
+        font-size: 1.8rem;
+        cursor: pointer;
+    }
+
+    /* Menú Oculto inicialmente */
+    ul {
+        display: none; 
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(2, 5, 2, 0.98);
+        padding: 20px 0;
+        border-bottom: 2px solid #1fec1f;
+        gap: 20px;
+    }
+
+    /* Clase para mostrar el menú con JS */
+    ul.active {
+        display: flex;
+    }
+
+    /* Ajuste del Título Hero (El problema principal en tu foto) */
+    .hero h1 {
+        font-size: 1.6rem !important; /* Reducción drástica para que quepa */
+        line-height: 1.3;
+        padding: 0 10px;
+    }
+
+    .hero p {
+        font-size: 0.8rem;
+        margin-bottom: 20px;
+    }
+}
+
+/* Ocultar botón de menú en escritorio */
+.menu-toggle {
+    display: none;
+}
+
+/* REPARACIÓN DE INTERFAZ MÓVIL */
+.menu-toggle {
+    display: none; /* Se oculta en computadora */
+    color: #1fec1f;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* Aparece en celular */
+    }
+
+    nav {
+        padding: 1rem 5%;
+    }
+
+    .logo {
+        font-size: 1.3rem !important; /* Achicamos el logo */
+    }
+
+    /* El menú se vuelve vertical y se oculta */
+    ul {
+        display: none; 
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(2, 5, 2, 0.98);
+        border-bottom: 2px solid #1fec1f;
+        padding: 20px 0;
+        gap: 20px;
+        text-align: center;
+        z-index: 2000;
+    }
+
+    /* Cuando activamos el menú */
+    ul.active {
+        display: flex;
+    }
+
+    /* AJUSTE DEL TÍTULO (Lo que se veía mal en tu foto) */
+    .hero h1 {
+        font-size: 1.5rem !important; /* Reducción para que no se corte */
+        line-height: 1.2 !important;
+        margin-top: 20px;
+        padding: 0 10px;
+    }
+
+    .hero p {
+        font-size: 0.8rem;
+    }
+
+    .btn-neon {
+        padding: 10px 20px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Añade esto al final de tu style.css */
+@media (max-width: 480px) {
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+    }
+    .wa-text {
+        display: none; /* Escondemos el texto "Protocolo Activo" solo en móviles muy pequeños */
+    }
+}
+
+#registro-pantalla {
+    display: none; /* Inicialmente oculto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 5, 0, 0.98); /* Fondo oscuro estilo tech */
+    backdrop-filter: blur(15px);
+    z-index: 5000; /* Por encima de todo */
+    justify-content: center;
+    align-items: center;
+}
+
+/* EFECTO RAYO DE ENERGÍA - PROTOCOLO VIBRA VERDE */
+.rayo-energia {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%; /* Más ancho para que cruce bien */
+    height: 200%;
+    background: linear-gradient(
+        115deg, 
+        transparent 40%, 
+        rgba(31, 236, 31, 0.3) 45%, 
+        rgba(255, 255, 255, 0.9) 50%, /* El núcleo blanco brillante */
+        rgba(31, 236, 31, 0.3) 55%, 
+        transparent 60%
+    );
+    pointer-events: none;
+    z-index: 1; /* Lo ponemos justo arriba del fondo, pero debajo de las letras */
+    opacity: 0;
+    filter: blur(30px);
+    transform: translate(-100%, -100%) rotate(25deg);
+}
+
+/* La clase que activa el disparo */
+.animar-rayo {
+    animation: flashRayo 1.5s ease-in-out forwards;
+}
+
+@keyframes flashRayo {
+    0% { transform: translate(-100%, -100%) rotate(25deg); opacity: 0; }
+    20% { opacity: 0.8; }
+    100% { transform: translate(50%, 50%) rotate(25deg); opacity: 0; }
+}
+
+/* BOTÓN FLOTANTE DEL CARRITO (Superior Derecha) */
+.cart-btn-flotante {
+    position: fixed;
+    bottom: 100px; /* Antes estaba en 20px o 40px, súbelo a 100px */
+    right: 25px;
+    background: rgba(10, 10, 10, 0.9);
+    border: 2px solid #1fec1f;
+    padding: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 2000;
+    box-shadow: 0 0 15px rgba(31, 236, 31, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.3s;
+}
+
+
+
+
+
+.cart-btn-flotante:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px #1fec1f;
+}
+
+#cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #1fec1f;
+    color: #000;
+    font-weight: bold;
+    font-size: 0.8rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+/* PANEL DEL CARRITO (DRAWER) */
+.cart-panel {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Oculto inicialmente */
+    width: 350px;
+    height: 100%;
+    background: #0a0a0a;
+    border-left: 2px solid #1fec1f;
+    z-index: 2000;
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+}
+
+.cart-panel.active {
+    right: 0;
+}
+
+.cart-header {
+    border-bottom: 1px solid rgba(31, 236, 31, 0.2);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-header h3 { color: #1fec1f; text-transform: uppercase; letter-spacing: 2px; }
+
+.close-cart { color: #fff; cursor: pointer; font-size: 1.5rem; }
+
+/* LISTA DE PRODUCTOS LIMPIA */
+#cart-items-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    color: #fff;
+    font-family: monospace;
+}
+
+.item-carrito {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.btn-cotizar-todo {
+    background: #1fec1f;
+    color: #000;
+    border: none;
+    padding: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.btn-cotizar-todo:hover {
+    background: #15b915;
+    letter-spacing: 1px;
+}
+
+/* ADAPTABILIDAD CELULAR */
+@media (max-width: 480px) {
+    .cart-panel { width: 100%; }
+    .cart-btn-flotante { top: 15px; right: 15px; width: 50px; height: 50px; }
+}
+
+/* El panel debe ser lo más importante cuando se abre */
+.cart-panel {
+    z-index: 3000 !important; 
+    background: #0a0a0a;
+    display: flex;
+    flex-direction: column;
+}
+
+/* El botón de WhatsApp debe estar por debajo del panel */
+.whatsapp-float {
+    z-index: 999; 
+}
+
+/* El botón del carrito también debajo del panel */
+.cart-btn-flotante {
+    z-index: 1000;
+}
+
+.logos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 40px;
+    align-items: center;
+    justify-items: center;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.logo-item {
+    position: relative;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all 0.4s ease;
+    cursor: crosshair;
+}
+
+.logo-item img {
+    max-width: 140px;
+    height: auto;
+}
+
+.logo-item:hover {
+    filter: grayscale(0%) brightness(1.2);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.logo-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(31, 236, 31, 0.2) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    z-index: -1;
+}
+
+.logo-item:hover .logo-glow {
+    opacity: 1;
+}
+
+
+/* ESTILOS DE SECCIÓN ALIADOS */
+.logos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 40px;
+    align-items: center;
+    justify-items: center;
+    margin-top: 50px;
+}
+
+.logo-item {
+    position: relative;
+    filter: grayscale(100%);
+    opacity: 0.5;
+    transition: all 0.4s ease;
+}
+
+.logo-item img {
+    max-width: 150px;
+    height: auto;
+    display: block;
+}
+
+.logo-item:hover {
+    filter: grayscale(0%) brightness(1.2);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.logo-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(31, 236, 31, 0.2) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.4s;
+}
+
+.logo-item:hover .logo-glow {
+    opacity: 1;
+}
+
+@keyframes bloom {
+    0% { transform: scale(0) rotate(-10deg); opacity: 0; filter: blur(10px); }
+    60% { transform: scale(1.1) rotate(5deg); opacity: 0.8; filter: blur(0px); }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.flor-animada {
+    animation: bloom 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards;
+}
+
+.visual-hologram::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: rgba(31, 236, 31, 0.5);
+    box-shadow: 0 0 15px #1fec1f;
+    animation: scan-bio 3s infinite linear;
+}
+
+@keyframes scan-bio {
+    0% { top: -10% }
+    100% { top: 110% }
+}
+
+/* Escáner de análisis biótico para las fotos */
+.visual-hologram {
+    position: relative;
+    overflow: hidden; /* Importante para que el láser no se salga */
+    border: 1px solid rgba(31, 236, 31, 0.3);
+}
+
+.visual-hologram::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: #1fec1f;
+    box-shadow: 0 0 15px #1fec1f, 0 0 30px #1fec1f;
+    opacity: 0.7;
+    animation: scan-bio 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes scan-bio {
+    0% { top: -10%; }
+    50% { top: 110%; }
+    100% { top: -10%; }
+}
+
+/* Efecto de pulso en la imagen cuando el escáner pasa */
+.visual-hologram img {
+    transition: filter 0.3s;
+}
+
+.visual-hologram:hover img {
+    filter: brightness(1.2) contrast(1.1) saturate(1.2);
+}
+
+/* Asegura que los enlaces capturen el evento de mouse */
+ul li a {
+    position: relative;
+    z-index: 10;
+    display: inline-block;
+    padding: 5px 10px;
+}
+
+/* Evita que el panel del carrito bloquee los clics si está cerrado */
+.cart-panel {
+    pointer-events: none; /* Desactivado por defecto */
+}
+
+.cart-panel.active {
+    pointer-events: all; /* Se activa solo al abrirse */
+}
+
