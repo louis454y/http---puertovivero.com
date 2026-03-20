@@ -1339,45 +1339,71 @@ ul li a:hover {
     100% { transform: translate(50%, 50%) rotate(25deg); opacity: 0; }
 }
 
-/* BOTÓN FLOTANTE DEL CARRITO (Superior Derecha) */
-.cart-btn-flotante {
-    position: fixed;
-    bottom: 100px; /* Antes estaba en 20px o 40px, súbelo a 100px */
-    right: 25px;
-    background: rgba(10, 10, 10, 0.9);
-    border: 2px solid #1fec1f;
-    padding: 15px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 2000;
-    box-shadow: 0 0 15px rgba(31, 236, 31, 0.3);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: 0.3s;
+/* ARREGLO DEFINITIVO PARA MÓVIL */
+@media (max-width: 768px) {
+    nav {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        position: relative !important;
+        height: 60px; /* Forzamos una altura para la barra */
+    }
+
+    /* Ocultamos el botón que flota abajo para que no se duplique */
+    .cart-btn-flotante {
+        display: none !important;
+    }
+
+    /* Posicionamos el carrito arriba a la derecha */
+    .cart-btn-nav {
+        display: flex !important;
+        position: absolute !important;
+        right: 65px; /* Lo separa de las rayitas ☰ */
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2000 !important;
+        cursor: pointer;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    .cart-icon {
+        font-size: 24px !important;
+    }
+
+    #cart-count {
+        position: absolute !important;
+        top: -5px !important;
+        right: -5px !important;
+        background: #1fec1f !important;
+        color: #000 !important;
+        width: 18px !important;
+        height: 18px !important;
+        border-radius: 50% !important;
+        font-size: 11px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        font-weight: bold !important;
+        box-shadow: 0 0 10px #1fec1f;
+    }
+
+    /* Aseguramos que el botón del menú ☰ esté en su esquina */
+    .menu-toggle {
+        position: absolute !important;
+        right: 15px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        display: block !important;
+    }
 }
 
-
-
-
-
-.cart-btn-flotante:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 25px #1fec1f;
+/* Ocultar el del nav en PC */
+@media (min-width: 769px) {
+    .cart-btn-nav {
+        display: none !important;
+    }
 }
-
-#cart-count {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: #1fec1f;
-    color: #000;
-    font-weight: bold;
-    font-size: 0.8rem;
-    padding: 2px 8px;
-    border-radius: 10px;
-}
-
 /* PANEL DEL CARRITO (DRAWER) */
 .cart-panel {
     position: fixed;
@@ -1638,5 +1664,562 @@ ul li a {
 
 .cart-panel.active {
     pointer-events: all; /* Se activa solo al abrirse */
+}
+
+#nav-menu a, .module-card, .btn-neon {
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+}
+
+/* SECCIÓN TESTIMONIOS */
+/* SECCIÓN TESTIMONIOS - FORMATO HORIZONTAL PRO */
+.testimonios-grid {
+    display: grid;
+    /* Ajustamos el minmax para que el grid entienda que las tarjetas son más anchas */
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); 
+    gap: 40px; /* Más espacio entre videos para que respiren */
+    padding: 30px 0;
+    justify-items: center;
+}
+
+.video-card {
+    width: 100%;
+    max-width: 550px; /* Tamaño aumentado: presencia fuerte sin ser gigante */
+    background: rgba(0, 10, 0, 0.9);
+    border: 1px solid #1fec1f88; /* Borde un poco más visible */
+    padding: 15px; /* Más aire interno */
+    position: relative;
+    /* Corte futurista más pronunciado */
+    clip-path: polygon(8% 0, 100% 0, 100% 88%, 92% 100%, 0 100%, 0 12%);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.video-card:hover {
+    border-color: #1fec1f;
+    transform: scale(1.03); /* Efecto de acercamiento suave */
+    box-shadow: 0 0 30px rgba(31, 236, 31, 0.15);
+}
+
+.video-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Mantenemos el formato panorámico */
+    background: #000;
+    overflow: hidden;
+    border: 1px solid rgba(31, 236, 31, 0.4);
+}
+
+.video-frame video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-info {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(31, 236, 31, 0.3);
+    padding: 12px 5px 0 5px;
+}
+
+.video-info p {
+    font-size: 0.85rem; /* Letra un poco más legible */
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+}
+
+.code-text {
+    color: #1fec1f;
+    font-size: 0.7rem;
+    font-family: 'Orbitron';
+    background: rgba(31, 236, 31, 0.1);
+    padding: 2px 8px;
+    border-radius: 2px;
+}
+
+/* Ajuste inteligente para laptops pequeñas y móviles */
+@media (max-width: 1100px) {
+    .testimonios-grid {
+        grid-template-columns: 1fr; /* Un video por fila si la pantalla se reduce */
+    }
+}
+
+@media (max-width: 600px) {
+    .video-card {
+        max-width: 95%;
+        padding: 10px;
+    }
+}
+
+/* ADAPTACIÓN MÓVIL */
+@media (max-width: 768px) {
+    .testimonios-grid {
+        grid-template-columns: 1fr; /* Un solo video por fila en celulares */
+        gap: 20px;
+    }
+    
+    .title-glow {
+        font-size: 1.8rem;
+    }
+}
+
+/* AJUSTE PARA EVITAR MENÚ AMONTONADO EN PC */
+@media (min-width: 1024px) {
+    nav {
+        padding: 0.8rem 3%; /* Aumenta el ancho utilizable */
+    }
+
+    #nav-menu {
+        display: flex;
+        gap: 15px; /* Espacio reducido entre enlaces para que quepan todos */
+        align-items: center;
+    }
+
+    #nav-menu li a {
+        font-size: 0.75rem; /* Tamaño de letra ligeramente más pequeño */
+        letter-spacing: 1px;
+        padding: 5px 8px;
+        white-space: nowrap; /* Evita que el texto se parta en dos líneas */
+    }
+
+    .logo {
+        font-size: 1.2rem; /* Reduce un poco el logo para dar más espacio al menú */
+        min-width: fit-content;
+    }
+}
+
+/* Si aún se ve apretado en pantallas medianas (laptops) */
+@media (min-width: 1024px) and (max-width: 1250px) {
+    #nav-menu {
+        gap: 8px;
+    }
+    
+    #nav-menu li a {
+        font-size: 0.7rem;
+    }
+}
+
+/* --- ARREGLO PARA CELULARES (RESPONSIVE) --- */
+@media (max-width: 1023px) {
+    /* Ocultamos el menú por defecto */
+    #nav-menu {
+        display: none; 
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%; /* Cubre toda la pantalla para impacto total */
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.98); /* Fondo oscuro profundo */
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        z-index: 9999;
+        border-left: 2px solid #1fec1f;
+        transition: 0.4s all ease-in-out;
+    }
+
+    /* Clase que activa el menú (se activa con JS) */
+    #nav-menu.active {
+        display: flex !important;
+    }
+
+    #nav-menu li a {
+        font-size: 1.5rem; /* Letras grandes para táctil */
+        color: #fff;
+        text-shadow: 0 0 10px #1fec1f;
+        text-transform: uppercase;
+    }
+
+    /* El botón hamburguesa debe ser visible siempre en móvil */
+    .menu-toggle {
+        display: block !important;
+        z-index: 10000;
+        cursor: pointer;
+        font-size: 2rem;
+        color: #1fec1f;
+    }
+}
+
+/* EL CARRITO ANCLADO AL PULGAR (ABAJO DERECHA) */
+.cart-btn-flotante {
+    display: flex !important; 
+    position: fixed !important; /* FIJO A LA VENTANA, NO AL CONTENIDO */
+    
+    /* COORDENADAS CRÍTICAS */
+    bottom: 25px !important;    /* Distancia desde abajo */
+    right: 20px !important;     /* Distancia desde la derecha */
+    top: auto !important;       /* ANULA CUALQUIER EMPUJE HACIA ARRIBA */
+    left: auto !important;      /* ANULA CUALQUIER EMPUJE DESDE LA IZQUIERDA */
+    
+    width: 60px !important;
+    height: 60px !important;
+    background: #000 !important;
+    border: 2px solid #1fec1f !important;
+    border-radius: 50% !important;
+    justify-content: center !important;
+    align-items: center !important;
+    z-index: 999999 !important; /* MÁXIMA PRIORIDAD VISUAL */
+    box-shadow: 0 0 20px rgba(31, 236, 31, 0.6) !important;
+    cursor: pointer;
+
+    /* ESTADO INICIAL PARA EL LOADER */
+    opacity: 0; 
+    pointer-events: none; 
+    transform: translateY(50px) scale(0.5); /* Viene desde abajo */
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ACTIVACIÓN POST-CARGA */
+.cart-btn-flotante.visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateY(0) scale(1) !important;
+}
+
+/* Ocultar el del nav para que no se duplique arriba */
+.cart-btn-nav {
+    display: none !important;
+}
+
+/* El círculo del número de productos */
+#cart-count {
+    position: absolute !important;
+    top: 0px !important;
+    right: 0px !important;
+    background: #1fec1f !important;
+    color: #000 !important;
+    width: 22px !important;
+    height: 22px !important;
+    border-radius: 50% !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border: 2px solid #000 !important;
+}
+
+/* AJUSTE DE TAMAÑO MÁS EQUILIBRADO (DEBAJO DEL ANTERIOR) */
+.cart-btn-flotante {
+    width: 55px !important;  /* Tamaño más estilizado */
+    height: 55px !important;
+    bottom: 20px !important; /* Posición ajustada */
+    right: 20px !important;
+    background: #000 !important; /* Fondo negro sólido para que resalte */
+}
+
+.cart-btn-flotante span:first-child {
+    font-size: 22px !important; /* Emoji proporcionado al círculo */
+}
+
+#cart-count {
+    width: 18px !important;
+    height: 18px !important;
+    font-size: 10px !important;
+    top: -2px !important;
+    right: -2px !important;
+    border: 1.5px solid #000 !important; /* Borde para que no se pegue al verde */
+}
+
+/* =========================================
+   ANIMACIÓN AVANZADA DEL CARRITO (LEVITACIÓN Y BRILLO)
+   ========================================= */
+.cart-btn-flotante {
+    display: flex !important;
+    position: fixed !important;
+    bottom: 25px !important; /* Posición base */
+    right: 25px !important;
+    width: 55px !important; /* Tamaño equilibrado que definimos */
+    height: 55px !important;
+    background: rgba(0, 10, 0, 0.9) !important; /* Fondo negro verdoso */
+    border: 2px solid #1fec1f !important;
+    border-radius: 50% !important;
+    justify-content: center !important;
+    align-items: center !important;
+    z-index: 99999 !important;
+    cursor: pointer;
+    
+    /* ASIGNACIÓN DE ANIMACIONES */
+    /* levitacion: 3s, suave, infinita */
+    /* brilloRespiracion: 2s, suave, infinita */
+    animation: levitacion 3s ease-in-out infinite, brilloRespiracion 2s ease-in-out infinite;
+    
+    /* Asegura que la animación sea fluida */
+    will-change: transform, box-shadow;
+}
+
+/* 1. ANIMACIÓN DE LEVITACIÓN (Movimiento vertical suave) */
+@keyframes levitacion {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px); /* Sube 8 píxeles */
+    }
+    100% {
+        transform: translateY(0px); /* Vuelve a la posición base */
+    }
+}
+
+/* 2. ANIMACIÓN DE BRILLO (Efecto respiración neón) */
+@keyframes brilloRespiracion {
+    0% {
+        box-shadow: 0 0 10px rgba(31, 236, 31, 0.4);
+        border-color: rgba(31, 236, 31, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(31, 236, 31, 0.8); /* Brillo intenso */
+        border-color: rgba(31, 236, 31, 1); /* Borde totalmente encendido */
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(31, 236, 31, 0.4);
+        border-color: rgba(31, 236, 31, 0.6);
+    }
+}
+
+/* Ajustes menores para los elementos internos */
+.cart-btn-flotante span:first-child {
+    font-size: 22px !important;
+    /* Mantenemos el emoji centrado a pesar del movimiento */
+    display: block;
+    transform: translateY(-1px); 
+}
+
+#cart-count {
+    /* El contador se mueve con el carrito, no necesita animación propia */
+    position: absolute !important;
+    top: -2px !important;
+    right: -2px !important;
+    background: #1fec1f !important;
+    color: #000 !important;
+    width: 19px !important;
+    height: 19px !important;
+    border-radius: 50% !important;
+    font-size: 11px !important;
+    font-weight: bold !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border: 2px solid #000 !important;
+}
+
+/* Contenedor de Formulario */
+.contacto-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.input-container-futurista {
+    position: relative;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    border-left: 3px solid #1fec1f;
+}
+
+.input-container-futurista input, 
+.input-container-futurista textarea {
+    width: 100%;
+    background: transparent;
+    border: 1px solid rgba(31, 236, 31, 0.2);
+    padding: 15px;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-container-futurista input:focus, 
+.input-container-futurista textarea:focus {
+    border-color: #1fec1f;
+    box-shadow: inset 0 0 10px rgba(31, 236, 31, 0.2);
+}
+
+/* Botón Épico de Envío */
+.btn-neon-large {
+    background: #1fec1f;
+    color: #000;
+    border: none;
+    padding: 18px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+    transition: 0.4s;
+}
+
+.btn-neon-large:hover {
+    background: #fff;
+    box-shadow: 0 0 30px #1fec1f;
+    transform: scale(1.02);
+}
+
+
+/* --- ESTILOS ÉPICOS PARA LA SECCIÓN NOSOTROS (VERSIÓN PROFESIONAL) --- */
+
+/* Contenedor Principal */
+.nosotros-bio-terminal {
+    display: flex;
+    flex-direction: row; /* PC: Foto izquierda, Texto derecha */
+    gap: 40px;
+    align-items: flex-start;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid rgba(31, 236, 31, 0.1); /* Borde tenue de terminal */
+    background: rgba(0, 5, 0, 0.5); /* Fondo negro de terminal */
+}
+
+/* 1. Marco del Scan y Contenedor de Foto */
+.bio-scan-frame {
+    flex: 0 0 auto;
+    width: 320px; /* Ancho de scan */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espacio para el cargo */
+}
+
+.bio-photo-scan {
+    width: 100%;
+    height: 400px; /* Alto de scan */
+    background: transparent;
+    border: 2px solid #1fec1f; /* Borde verde sólido anguloso */
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(31, 236, 31, 0.4);
+}
+
+.bio-photo-scan img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta la foto para llenar el scan */
+    
+    /* --- ELIMINADOS LOS FILTROS CIBERNÉTICOS (FOTO NORMAL) --- */
+    filter: none; /* Asegura que no haya filtros */
+    opacity: 1; /* Foto totalmente opaca y nítida */
+}
+
+/* Barra de Estado del Scan */
+.bio-status-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #000;
+    color: #1fec1f;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    padding: 6px 10px;
+    letter-spacing: 1px;
+    text-align: center;
+    border-top: 1px solid rgba(31, 236, 31, 0.2);
+    z-index: 3;
+}
+
+/* --- ESTILO PARA EL CARGO (GERENTE COMERCIAL) --- */
+.bio-cargo-tag {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+/* 2. Contenedor de Textos */
+.bio-data-content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.bio-perfil-data strong {
+    color: #1fec1f;
+    font-weight: bold;
+}
+
+/* Caja de Protocolo (Nuestra Filosofía) */
+.bio-protocol-box {
+    position: relative;
+    border-left: 3px solid #1fec1f;
+    padding: 15px;
+    background: rgba(31, 236, 31, 0.02);
+}
+
+.bio-protocol-box h4 {
+    margin-bottom: 10px;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+}
+
+.bio-protocol-box p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* 3. Contenedor de Estadísticas */
+.bio-stats-terminal {
+    display: flex;
+    gap: 30px;
+    margin-top: 15px;
+}
+
+.bio-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.bio-stat-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 10px #1fec1f;
+}
+
+.bio-stat-desc {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.6rem;
+    color: rgba(31, 236, 31, 0.7);
+    letter-spacing: 1px;
+    margin-top: 2px;
+}
+
+/* AJUSTES PARA CELULAR (RESPONSIVE) */
+@media (max-width: 900px) {
+    .nosotros-bio-terminal {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .bio-scan-frame {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .bio-photo-scan {
+        height: 380px;
+    }
+
+    .bio-stats-terminal {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
 }
 

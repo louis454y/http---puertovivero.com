@@ -41,10 +41,95 @@ const inventarioVivero = {
 };
 
 let carrito = [];
+let audioDesbloqueado = false;
 
-/**
- * Función principal para desplegar la ventana de inventario
- */
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- LÓGICA DEL LOADER E INICIO ---
+    const btnExplorar = document.getElementById("btn-explorar");
+    if (btnExplorar) {
+        btnExplorar.addEventListener("click", function() {
+            const mensaje = document.getElementById("loader-mensaje");
+            const progreso = document.getElementById("loader-progreso");
+            const percentageText = document.getElementById("load-percentage");
+            const barFill = document.getElementById("bar-fill");
+            const loader = document.getElementById("loader-wrapper");
+            const musica = document.getElementById("musica-fondo");
+            const leaf1 = document.querySelector(".leaf-1");
+            const leaf2 = document.querySelector(".leaf-2");
+            const leaf3 = document.querySelector(".leaf-3");
+
+            
+
+            if (musica) {
+                musica.volume = 0.2; 
+                musica.play().catch(e => console.log("Audio habilitado"));
+            }
+
+            this.style.display = "none";
+            if (progreso) progreso.style.display = "block";
+            if (mensaje) mensaje.innerText = "INICIALIZANDO PROTOCOLO BIÓTICO...";
+
+            let count = 0;
+            const startLoading = setInterval(() => {
+                count++;
+                if (percentageText) percentageText.innerText = count + "%";
+                if (barFill) barFill.style.width = count + "%";
+                
+                if(count > 20 && leaf1) {
+                    leaf1.style.opacity = "1";
+                    leaf1.style.width = "40px";
+                    leaf1.style.height = "40px";
+                }
+                
+              if(count > 80 && leaf3) {
+    leaf3.style.opacity = "1";
+    leaf3.style.width = "45px";
+    leaf3.style.height = "45px";
+}
+                if (count >= 100) {
+                    clearInterval(startLoading);
+                    window.scrollTo(0, 0);
+                    setTimeout(() => {
+                        loader.style.opacity = "0";
+                        loader.style.visibility = "hidden";
+                        audioDesbloqueado = true; 
+
+                        // --- ACTIVAR CARRITO AQUÍ ---
+                        const btnCarrito = document.querySelector('.cart-btn-flotante');
+                        if (btnCarrito) {
+                            btnCarrito.classList.add('visible');
+                        }
+                    }, 500);
+                }
+            }, 30);
+        });
+    }
+    
+
+    // --- LÓGICA DE MENÚ MÓVIL ---
+    const btnHamburguesa = document.querySelector('.menu-toggle');
+    const menuNavegacion = document.getElementById('nav-menu');
+    const enlacesMenu = document.querySelectorAll('#nav-menu li a');
+
+    if (btnHamburguesa && menuNavegacion) {
+        btnHamburguesa.addEventListener('click', () => {
+            menuNavegacion.classList.toggle('active');
+            btnHamburguesa.classList.toggle('open');
+        });
+
+        enlacesMenu.forEach(enlace => {
+            enlace.addEventListener('click', () => {
+                menuNavegacion.classList.remove('active');
+                btnHamburguesa.classList.remove('open');
+            });
+        });
+    }
+
+    aplicarSonidos();
+});
+
+// --- FUNCIONES DE INVENTARIO Y VENTANAS ---
 function abrirVentana(categoria) {
     const modal = document.getElementById('ventana-productos');
     const titulo = document.getElementById('titulo-categoria');
@@ -58,7 +143,6 @@ function abrirVentana(categoria) {
     inventarioVivero[categoria].items.forEach((planta, index) => {
         const divItem = document.createElement('div');
         divItem.className = 'planta-link-cotizador';
-        
         const inputID = `cant-${categoria}-${index}`;
 
         divItem.innerHTML = `
@@ -89,16 +173,11 @@ function abrirVentana(categoria) {
         lista.appendChild(divItem);
     });
 
-    // IMPORTANTE: Aplicar sonidos a los nuevos elementos generados
     aplicarSonidos();
-
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 }
 
-/**
- * Sistema de Carrito
- */
 function agregarAlCarrito(nombre, idInput, boton) {
     const inputElement = document.getElementById(idInput);
     const cantidad = parseInt(inputElement.value);
@@ -107,7 +186,6 @@ function agregarAlCarrito(nombre, idInput, boton) {
     if (isNaN(cantidad) || cantidad < 1) return;
 
     const existe = carrito.find(item => item.nombre === nombre && item.altura === altura);
-    
     if (existe) {
         existe.cantidad += cantidad;
     } else {
@@ -148,7 +226,6 @@ function actualizarCarritoUI() {
             </div>
         `;
     });
-    
     count.innerText = totalItems;
 }
 
@@ -163,7 +240,6 @@ function toggleCart() {
 
 function enviarPedidoWhatsApp() {
     if (carrito.length === 0) return alert("El protocolo de pedido está vacío.");
-
     const nombreCliente = document.getElementById('final-nombre').value.trim();
     const ciudadCliente = document.getElementById('final-ciudad').value.trim();
 
@@ -180,11 +256,9 @@ function enviarPedidoWhatsApp() {
     carrito.forEach(item => {
         mensaje += `- ${item.nombre} (${item.altura}): ${item.cantidad} unidades%0A`;
     });
-    
     mensaje += `%0AHola Luis, me interesa este listado. ¿Me confirmas disponibilidad y precios?`;
 
-    const url = `https://wa.me/573025465134?text=${mensaje}`;
-    window.open(url, '_blank');
+    window.open(`https://wa.me/573025465134?text=${mensaje}`, '_blank');
 }
 
 function cerrarVentana() {
@@ -193,13 +267,11 @@ function cerrarVentana() {
     document.body.style.overflow = 'auto';
 }
 
-// Animación de Rayo de Energía
-if (!document.querySelector('.rayo-energia')) {
-    const rayoDiv = document.createElement('div');
-    rayoDiv.className = 'rayo-energia';
-    document.body.appendChild(rayoDiv);
+window.onclick = function(e) {
+    if (e.target.className === 'modal-overlay') cerrarVentana();
 }
 
+// --- EFECTOS DE SONIDO Y RAYOS ---
 function dispararRayo() {
     const rayo = document.querySelector('.rayo-energia');
     if(rayo) {
@@ -210,158 +282,79 @@ function dispararRayo() {
 }
 setTimeout(dispararRayo, 3000);
 
-window.onclick = function(e) {
-    if (e.target.className === 'modal-overlay') cerrarVentana();
-}
-
-/* GESTIÓN DE NAVEGACIÓN */
-document.addEventListener('DOMContentLoaded', () => {
-    const btnHamburguesa = document.querySelector('.menu-toggle');
-    const menuNavegacion = document.querySelector('nav ul');
-
-    if (btnHamburguesa && menuNavegacion) {
-        btnHamburguesa.addEventListener('click', () => {
-            menuNavegacion.classList.toggle('active');
-            btnHamburguesa.classList.toggle('open');
-        });
-
-        const enlaces = menuNavegacion.querySelectorAll('a');
-        enlaces.forEach(link => {
-            link.addEventListener('click', () => {
-                menuNavegacion.classList.remove('active');
-                btnHamburguesa.classList.remove('open');
-            });
-        });
-    }
-});
-
-// Forzar inicio arriba
-if (history.scrollRestoration) {
-    history.scrollRestoration = 'manual';
-}
-
-window.onbeforeunload = function () {
-    window.scrollTo(0, 0);
-};
-
-/* EFECTOS AMBIENTALES */
-function crearPolen() {
-    const polen = document.createElement('div');
-    polen.style.position = 'fixed';
-    polen.style.width = '2px';
-    polen.style.height = '2px';
-    polen.style.background = '#1fec1f';
-    polen.style.left = Math.random() * 100 + 'vw';
-    polen.style.top = '110vh';
-    polen.style.opacity = Math.random();
-    polen.style.borderRadius = '50%';
-    polen.style.zIndex = '-1';
-    polen.style.boxShadow = '0 0 5px #1fec1f';
-    document.body.appendChild(polen);
-
-    const animacion = polen.animate([
-        { transform: 'translateY(0)', opacity: polen.style.opacity },
-        { transform: 'translateY(-110vh)', opacity: 0 }
-    ], {
-        duration: Math.random() * 5000 + 5000,
-        easing: 'linear'
-    });
-
-    animacion.onfinish = () => polen.remove();
-}
-setInterval(crearPolen, 300);
-
-function crearParticulaOxigeno() {
-    const particula = document.createElement('div');
-    particula.style.position = 'fixed';
-    particula.style.width = Math.random() * 3 + 'px';
-    particula.style.height = particula.style.width;
-    particula.style.background = '#1fec1f';
-    particula.style.left = Math.random() * 100 + 'vw';
-    particula.style.top = '110vh';
-    particula.style.opacity = Math.random() * 0.5;
-    particula.style.borderRadius = '50%';
-    particula.style.zIndex = '-1';
-    particula.style.pointerEvents = 'none';
-    particula.style.boxShadow = '0 0 8px #1fec1f';
-    
-    document.body.appendChild(particula);
-
-    const duracion = Math.random() * 8000 + 4000;
-    const animacion = particula.animate([
-        { transform: 'translateY(0) translateX(0)', opacity: particula.style.opacity },
-        { transform: `translateY(-120vh) translateX(${(Math.random() - 0.5) * 100}px)`, opacity: 0 }
-    ], {
-        duration: duracion,
-        easing: 'ease-out'
-    });
-
-    animacion.onfinish = () => particula.remove();
-}
-setInterval(crearParticulaOxigeno, 400);
-
-/**
- /**
- * PROTOCOLO DE AUDIO - DESBLOQUEO Y EJECUCIÓN
- */
-const hoverSound = document.getElementById('hover-audio');
-let audioDesbloqueado = false;
-
-function desbloquearAudio() {
-    if (!audioDesbloqueado && hoverSound) {
-        // Intentar reproducir y pausar inmediatamente para ganar permiso del navegador
-        hoverSound.play().then(() => {
-            hoverSound.pause();
-            hoverSound.currentTime = 0;
-            audioDesbloqueado = true;
-            console.log("Sistema de audio operativo.");
-        }).catch(err => console.log("Esperando interacción para activar audio..."));
-    }
-}
-
-// Desbloquear con el primer clic en el documento
-document.addEventListener('click', desbloquearAudio, { once: true });
-
 function ejecutarSonido() {
+    const hoverSound = document.getElementById('hover-audio');
     if (audioDesbloqueado && hoverSound) {
         hoverSound.currentTime = 0;
-        hoverSound.volume = 0.2; // Subí un poco el volumen para que lo notes
-        hoverSound.play().catch(e => console.log("Error al reproducir:", e));
+        hoverSound.volume = 0.1;
+        hoverSound.play().catch(e => {});
     }
 }
 
 function aplicarSonidos() {
-    // Seleccionamos todos los elementos que deben sonar
-    const targets = document.querySelectorAll('#nav-menu a, .logo, .btn-neon, .module-card, .logo-item, .btn-cotizar-item');
-
+    const targets = document.querySelectorAll(
+        '#nav-menu a, .logo, .btn-neon, .module-card, .logo-item, .video-card, .cart-btn-nav, .btn-cotizar-item'
+    );
     targets.forEach(target => {
-        // Limpiamos eventos previos para evitar sonidos dobles
         target.removeEventListener('mouseenter', ejecutarSonido);
         target.addEventListener('mouseenter', ejecutarSonido);
     });
 }
 
-// Única llamada oficial al cargar el documento
-document.addEventListener('DOMContentLoaded', aplicarSonidos);
-function aplicarSonidos() {
-    // Seleccionamos todos los enlaces del menú y elementos interactivos
-    const targets = document.querySelectorAll('#nav-menu a, .logo, .btn-neon, .module-card, .logo-item');
+// --- FORMULARIO DE CONTACTO ---
+const formProtocolo = document.getElementById('form-protocolo');
+if(formProtocolo) {
+    formProtocolo.addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        const nombre = document.getElementById('nombre-contacto').value;
+        const email = document.getElementById('email-contacto').value;
+        const mensaje = document.getElementById('mensaje-contacto').value;
 
-    targets.forEach(target => {
-        target.addEventListener('mouseenter', () => {
-            ejecutarSonido(); // Esta es la función que ya tienes definida
-        });
+        let textoWA = `*NUEVO CONTACTO - SISTEMA BIÓTICO*%0A%0A`;
+        textoWA += `*Nombre:* ${nombre}%0A`;
+        textoWA += `*Email:* ${email}%0A`;
+        textoWA += `*Mensaje:* ${mensaje}`;
+
+        window.open(`https://wa.me/573025465134?text=${textoWA}`, '_blank');
     });
 }
 
-// IMPORTANTE: Llama a la función cuando cargue la página
-document.addEventListener('DOMContentLoaded', () => {
-    aplicarSonidos();
-});
 
-// Esto fuerza a que todos los enlaces y tarjetas escuchen el mouse
-document.addEventListener('DOMContentLoaded', () => {
-    if (typeof aplicarSonidos === 'function') {
-        aplicarSonidos();
+/**
+ * PROTOCOLO DE AUDIO AVANZADO CON FADE
+ * Suaviza la salida y reinicia el ambiente biótico al volver.
+ */
+document.addEventListener("visibilitychange", () => {
+    const musica = document.getElementById("musica-fondo");
+    if (!musica || !audioDesbloqueado) return;
+
+    if (document.hidden) {
+        // EFECTO FADE OUT: Baja el volumen gradualmente antes de pausar
+        let fadeOut = setInterval(() => {
+            if (musica.volume > 0.05) {
+                musica.volume -= 0.05;
+            } else {
+                clearInterval(fadeOut);
+                musica.pause();
+                musica.currentTime = 0; // Reinicia para la próxima vuelta
+            }
+        }, 50); // Velocidad del desvanecimiento
+    } else {
+        // EFECTO FADE IN: Sube el volumen gradualmente al regresar
+        musica.volume = 0;
+        musica.play().catch(e => console.log("Reactivación bloqueada"));
+        
+        let fadeIn = setInterval(() => {
+            if (musica.volume < 0.15) { // Tu volumen objetivo de 0.2 aprox
+                musica.volume += 0.02;
+            } else {
+                clearInterval(fadeIn);
+            }
+        }, 100);
     }
 });
+
+
+
+
+
