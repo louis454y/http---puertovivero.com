@@ -6,8 +6,10 @@
     <title>Puerto Vivero | Botánica Futurista</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
 </head>
 <body>
+    
 
 <div id="loader-wrapper">
     <div class="loader-content">
@@ -18,7 +20,7 @@
 <div class="leaf leaf-3"></div>
         </div>
 
-        <div id="loader-mensaje" class="loading-text">SISTEMA BIÓTICO LISTO</div>
+        <div id="loader-mensaje" class="loading-text">PLANTAS INJERTADAS LISTAS</div>
         
         <button id="btn-explorar" class="btn-neon" style="margin-top: 20px; padding: 12px 30px; font-size: 0.9rem;">
             EXPLORAR PUERTO VIVERO
@@ -59,13 +61,13 @@
 
 <section id="inicio" class="hero">
     <div class="overlay"></div>
-    <h1>Ecosistemas de Próxima Generación</h1>
+    <h1>PLANTAS LISTAS PARA UNA RAPIDA PRODUCCION</h1>
     <p>Bienvenido a la vanguardia de la oxigenación urbana.</p>
     <button class="btn-neon" onclick="location.href='#productos'">Explorar Catálogo</button>
 </section>
 
 <section id="productos" class="section-padding">
-    <h2 class="title-glow">Sistemas Bio-Digitales</h2>
+    <h2 class="title-glow">PRODUCTOS DISPONIBLES</h2>
     <p class="subtitle">Seleccione un módulo para desplegar el inventario detallado.</p>
     
     <div class="main-modules">
@@ -91,7 +93,7 @@
 
 <section id="testimonios" class="section-padding">
     <div class="container">
-        <h2 class="title-glow">Evidencia de Éxito</h2>
+        <h2 class="title-glow">TESTIMONIOS DE NUESTROS CLIENTES⭐</h2>
         <p class="subtitle">REGISTROS DE PROTOCOLOS COMPLETADOS SATISFACTORIAMENTE</p>
         
         <div class="testimonios-grid">
@@ -113,7 +115,7 @@
 
 <section id="mision" class="section-padding">
     <div class="mission-wrapper">
-        <h2 class="title-glow">Protocolo de Misión</h2>
+        <h2 class="title-glow">NUESTRA MISION</h2>
         <p class="subtitle">ESTABLECIENDO ESTÁNDARES DE ÉLITE EN INFRAESTRUCTURA BIÓTICA</p>
         
         <div class="mission-grid-v2">
@@ -149,7 +151,7 @@
 
 <section id="aliados" class="section-padding">
     <div class="container">
-        <h2 class="title-glow">Nodos de Confianza</h2>
+        <h2 class="title-glow">NUESTROS ALIADOS EXTRATEGICOS</h2>
         <div class="logos-grid">
             <div class="logo-item"><img src="imagenes/logo-empresa1.png" alt="Aliado" class="logo-gray"><div class="logo-glow"></div></div>
             <div class="logo-item"><img src="imagenes/logo-empresa2.png" alt="Aliado" class="logo-gray"><div class="logo-glow"></div></div>
@@ -204,7 +206,7 @@
 
 <section id="contacto" class="section-padding">
     <div class="container">
-        <h2 class="title-glow">ENLACE DE PROTOCOLO</h2>
+        <h2 class="title-glow">ASESORIA PERSONALIZADA</h2>
         <div class="contacto-wrapper">
             <div class="contacto-info">
                 <div class="info-item">
@@ -253,13 +255,14 @@
 </div>
 
 <div id="cart-panel" class="cart-panel">
-    <div class="cart-header"><h3>Tu Pedido</h3><span class="close-cart" onclick="toggleCart()">✕</span></div>
-    <div id="cart-items-list"></div>
-    <div id="datos-pedido-final" style="padding: 15px; border-top: 1px solid #1fec1f; margin-top: 10px;">
-        <input type="text" id="final-nombre" placeholder="NOMBRE COMPLETO" class="input-futurista" style="width:100%; margin-bottom:10px;">
-        <input type="text" id="final-ciudad" placeholder="CIUDAD / UBICACIÓN" class="input-futurista" style="width:100%;">
+    <div class="cart-header">
+        <h3>Tu Pedido</h3>
+        <span class="close-cart" onclick="toggleCart()">✕</span>
     </div>
-    <button class="btn-cotizar-todo" onclick="enviarPedidoWhatsApp()">Enviar Cotización Directa</button>
+    
+    <div id="cart-items-list"></div>
+    
+    <div id="datos-pedido-final"></div>
 </div>
 
 <div class="cart-btn-flotante" onclick="toggleCart()">
