@@ -290,4 +290,21 @@ function configurarMenuMovil() {
     if(toggle) toggle.addEventListener('click', () => { nav.classList.toggle('active'); toggle.classList.toggle('open'); });
 }
 
+// 1. Seleccionamos el botón de la hamburguesa y el menú de la lista
+const menuToggle = document.querySelector('.menu-toggle');
+const navMenu = document.getElementById('nav-menu');
+const navLinks = document.querySelectorAll('#nav-menu a');
+
+// 2. Escuchamos el clic en cada enlace del menú
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        // Al hacer clic, removemos la clase que mantiene el menú abierto
+        // (Asegúrate de que 'active' sea el nombre de la clase que usas en tu CSS)
+        navMenu.classList.remove('active'); 
+        
+        // Si también cambias el icono de la hamburguesa, podrías resetearlo aquí
+        console.log("Menú cerrado automáticamente al seleccionar sección");
+    });
+});
+
 
