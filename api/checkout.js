@@ -2,7 +2,7 @@ const { MercadoPagoConfig, Preference } = require('mercadopago');
 
 // CONFIGURA AQUÍ TU ACCESS TOKEN DE PRODUCCIÓN
 const client = new MercadoPagoConfig({ 
-    accessToken: 'APP_USR-1774152968143602-032917-35eecdb6f3f8c4f0089298308d296188-3299829753' 
+    accessToken: 'APP_USR-1277300571452666-032917-aec7af6f189a7cffbc7d4e86c7c69f08-692715586' 
 });
 
 export default async function handler(req, res) {

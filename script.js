@@ -1,5 +1,5 @@
 // --- 1. BASE DE DATOS DE PRODUCTOS ---
-const mp = new MercadoPago('APP_USR-ee3b8bb0-c550-4343-87fc-fe6db5f9d64b', {
+const mp = new MercadoPago('APP_USR-d5d72b35-289d-4dc6-a017-b791c3576a8d', {
     locale: 'es-CO'
 });
 
